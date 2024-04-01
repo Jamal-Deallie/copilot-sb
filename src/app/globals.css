@@ -1,33 +1,180 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.texture {
+  background: url('/images/bg-image.webp') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  /* media-queries */
+  @media (min-width: 800px) {
+    --viewport-w: 1366;
+    --nav-height: 70;
+    --random-width: 14;
+  }
+
+  @media (max-width: 800px) {
+    --viewport-w: 375;
+    --nav-height: 65;
+  }
+  /* media-queries */
+
+  /* colors */
+
+  --primary: 0 0% 0%;
+  --primary-foreground: 3, 83%, 53%;
+  --secondary: 3, 83%, 53%;
+  --secondary-foreground: 0 0% 0%;
+  --accent: 60, 100%, 98%;
+  /* colors */
+
+  /* font */
+  --lh: calc(2px + 2ex + 2px);
+  /* font */
+}
+
+@layer base {
+  .title-xl {
+    @apply text-7xl lg:text-10xl font-heading uppercase;
+  }
+  .title-lg {
+    @apply text-3xl lg:leading-none lg:text-9xl font-heading uppercase;
+  }
+  .title-md {
+    @apply text-4xl leading-none lg:text-5xl font-heading;
+  }
+  .title-sm {
+    @apply text-2xl leading-none lg:text-4xl font-heading;
+  }
+  .title-xs {
+    @apply text-xl leading-none lg:text-2xl font-heading;
+  }
+  .grid-inner {
+    @apply grid grid-cols-12 gap-x-6 md:grid-cols-6;
+  }
+  .grid-block {
+    @apply grid grid-cols-12 md:grid-cols-6;
+  }
+  .main-text {
+    @apply text-lg lg:text-xl font-body;
+  }
+  p {
+    @apply font-body;
+  }
+  .after {
+    @apply w-16 h-16 rounded-[2rem] overflow-hidden [&_>_ul]:opacity-0 [&>ul]:delay-[.50s] [&>ul]:duration-300;
+  }
+  .before {
+    @apply w-fit h-fit rounded-[1rem] [&_>_ul]:opacity-100 [&>ul]:delay-[1s] [&>ul]:transition-opacity [&>ul]:ease-in-out [&>ul]:duration-300;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer utilities {
+  .img-clip {
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .flip-item {
+    transform: scaleX(-1);
+  }
+  .text-mask {
+    --mask: linear-gradient(-45deg, transparent 100%, black 100%);
+    -webkit-mask-image: var(--mask);
+    mask-image: var(--mask);
+    width: 100%;
+  }
+
+  .clippy {
+    clip-path: polygon(90% 0%, 100% 0%, 100% 10%, 90% 10%);
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.btn-test {
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.bounce-11 {
+  animation: bounce-12 1.5s infinite;
+  animation-timing-function: ease;
+}
+.bounce-12 {
+  animation: bounce-reverse 1.5s infinite;
+  animation-timing-function: ease;
+}
+
+@keyframes bounce-12 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes bounce-reverse {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.anime {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
