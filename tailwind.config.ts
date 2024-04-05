@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 export default {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/stories/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       lg: { min: '800px' },
@@ -15,14 +15,15 @@ export default {
       xl: ['calc(20 * (100vw / var(--viewport-w)))', 'var(--lh)'],
       '2xl': ['calc(22 * (100vw / var(--viewport-w)))', 'var(--lh)'],
       '3xl': 'calc(33 * (100vw / var(--viewport-w)))',
-      '4xl': 'calc(38 * (100vw / var(--viewport-w)))',
+      '4xl': 'calc(42 * (100vw / var(--viewport-w)))',
       '5xl': 'calc(48 * (100vw / var(--viewport-w)))',
       '6xl': 'calc(50.04 * (100vw / var(--viewport-w)))',
       '7xl': 'calc(57.36  * (100vw / var(--viewport-w)))',
       '8xl': 'calc(68 * (100vw / var(--viewport-w)))',
-      '9xl': 'calc(96 * (100vw / var(--viewport-w)))',
-      '10xl': 'calc(126 * (100vw / var(--viewport-w)))',
+      '9xl': 'calc(86 * (100vw / var(--viewport-w)))',
+      '10xl': 'calc(93 * (100vw / var(--viewport-w)))',
     },
+    fontFamily: {},
     spacing: {
       0: 'calc(0 * (100vw / var(--viewport-w)))',
       1: 'calc(4 * (100vw / var(--viewport-w)))',
@@ -66,9 +67,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['var(--heading-font)'],
-        body: ['var(--body-font)'],
-        script: ['var(--script-font)'],
+        heading: 'leading',
+        body: 'itagi-sans',
+        cartload: 'cartload',
       },
       spacing: {
         'nav-height': 'calc(var(--nav-height) * (100vw / var(--viewport-w)))',
@@ -117,16 +118,16 @@ export default {
       // Generate utilities for width, height, margin, and padding
       matchUtilities(
         {
-          width: value => ({
+          'w-': value => ({
             width: `calc(${value} * (100vw / var(--viewport-w)))`,
           }),
-          height: value => ({
+          'h-': value => ({
             height: `calc(${value} * (100vw / var(--viewport-w)))`,
           }),
-          margin: value => ({
+          'm-': value => ({
             margin: `calc(${value} * (100vw / var(--viewport-w)))`,
           }),
-          padding: value => ({
+          'p-': value => ({
             padding: `calc(${value} * (100vw / var(--viewport-w)))`,
           }),
         },
